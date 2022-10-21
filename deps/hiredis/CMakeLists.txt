@@ -1,4 +1,16 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.4.0)
+add_library(hiredis STATIC
+        #这个在master是有的，6.0分支没有了
+        #alloc.c
+        async.c
+        dict.c
+        hiredis.c
+        net.c
+        read.c
+        sds.c
+        sockcompat.c)
+
+# 注释的源码自带的
+#[[CMAKE_MINIMUM_REQUIRED(VERSION 3.4.0)
 INCLUDE(GNUInstallDirs)
 PROJECT(hiredis)
 
@@ -46,10 +58,10 @@ INSTALL(TARGETS hiredis
 
 INSTALL(FILES hiredis.h read.h sds.h async.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
-    
+
 INSTALL(DIRECTORY adapters
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
-    
+
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis.pc
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
@@ -71,7 +83,7 @@ IF(ENABLE_SSL)
 
     INSTALL(FILES hiredis_ssl.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hiredis)
-    
+
     INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/hiredis_ssl.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 ENDIF()
@@ -87,4 +99,4 @@ ENDIF()
 # Add examples
 IF(ENABLE_EXAMPLES)
   ADD_SUBDIRECTORY(examples)
-ENDIF(ENABLE_EXAMPLES)
+ENDIF(ENABLE_EXAMPLES)]]
